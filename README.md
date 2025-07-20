@@ -32,7 +32,7 @@ Sigue estos pasos para poner en marcha el proyecto en tu máquina local.
 1.  **Clona el repositorio:**
 
     ```bash
-    git clone [https://github.com/dacaceros97/mi-sitio-servicios](https://github.com/dacaceros97/mi-sitio-servicios)
+    git clone [https://github.com/dacaceros97/mi-sitio-servicios](https://github.com/dacaceros97/mi-sitio-servicios).
     cd mi-sitio-servicios
     ```
 
@@ -54,8 +54,6 @@ Sigue estos pasos para poner en marcha el proyecto en tu máquina local.
     ```env
     NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api/appointments
     ```
-
-    (Asegúrate de que esta URL coincida con la dirección de tu backend.)
 
 4.  **Inicia el servidor de desarrollo:**
 
