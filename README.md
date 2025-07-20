@@ -33,7 +33,7 @@ Sigue estos pasos para poner en marcha el proyecto en tu máquina local.
 
     ```bash
     git clone [https://github.com/dacaceros97/mi-sitio-servicios](https://github.com/dacaceros97/mi-sitio-servicios)
-    cd nombre-del-repositorio-frontend
+    cd mi-sitio-servicios
     ```
 
 2.  **Instala las dependencias:**
