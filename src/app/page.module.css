@@ -1,167 +1,400 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+/* src/app/page.module.css */
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
+/* --- Estilos compartidos o solo para tema claro --- */
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  /* Añadimos min-height para asegurar que el footer siempre esté abajo si el contenido es corto */
+  min-height: calc(
+    100vh - 100px
+  ); /* Ajusta 100px según la altura de tu header y footer juntos */
+  display: flex;
+  flex-direction: column; /* Organiza el contenido en columna */
 }
 
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+/* Header del Layout (global) */
+.headerLayout {
+  background-color: var(--header-bg-light);
+  color: var(--header-text-light);
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+.headerLayout .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--accent-color-light);
+  text-decoration: none;
+  flex-shrink: 0; /* Evita que el logo se encoja */
+}
+
+.headerLayout .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Por defecto ocupa todo el ancho */
+  margin-top: 10px; /* Espacio entre logo y nav en móvil */
+}
+
+.headerLayout .navLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap; /* Los enlaces también pueden envolverse */
+  justify-content: center; /* Centra los enlaces si se envuelven */
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.headerLayout .navLinks li {
+  white-space: nowrap; /* Evita que los enlaces se rompan en varias líneas */
+}
+
+.headerLayout .navLinks a {
+  color: var(--header-text-light);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.headerLayout .navLinks a:hover {
+  color: var(--accent-color-light);
+}
+
+/* Media query para headerLayout en pantallas más grandes */
+@media (min-width: 768px) {
+  .headerLayout .navbar {
+    width: auto; /* En pantallas grandes, no ocupa todo el ancho */
+    margin-top: 0; /* Elimina el margen superior */
+  }
+  .headerLayout .navLinks {
+    width: auto;
+    justify-content: flex-end; /* Alinea a la derecha en pantallas grandes */
   }
 }
 
-.main {
+/* Header / Hero Section (ESPECÍFICO de la página de inicio) */
+.heroHeader {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--header-bg-light);
+  color: var(--header-text-light);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column; /* Para centrar el contenido verticalmente */
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh; /* Altura mínima para que el hero se vea bien en todas las pantallas */
+}
+
+.heroHeader h1 {
+  font-size: clamp(2em, 5vw, 3em); /* Tamaño de fuente responsivo */
+  margin-bottom: 15px;
+  color: var(--accent-color-light);
+  max-width: 800px; /* Limita el ancho del título en pantallas muy grandes */
+}
+
+.heroHeader p {
+  font-size: clamp(1em, 2.5vw, 1.2em); /* Tamaño de fuente responsivo */
+  margin-bottom: 30px;
+  max-width: 700px;
+}
+
+/* Agendar Page Header (ESPECÍFICO de la página de agendar) */
+.bookingHeader {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--header-bg-light);
+  color: var(--header-text-light);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.bookingHeader h1 {
+  font-size: clamp(2em, 4vw, 2.5em); /* Tamaño de fuente responsivo */
+  margin-bottom: 15px;
+  color: var(--accent-color-light);
+}
+
+.bookingHeader p {
+  font-size: clamp(0.9em, 2vw, 1.1em); /* Tamaño de fuente responsivo */
+  margin-bottom: 30px;
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--accent-color-light);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Evita que el botón se rompa en varias líneas */
+}
+
+.ctaButton:hover {
+  background-color: var(--header-text-light);
+}
+
+.mainContent {
+  flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+  margin-bottom: 60px;
+}
+
+.serviceSection,
+.bookingSection,
+.testimonialsSection {
+  background-color: var(--card-bg-light);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.serviceSection h2,
+.bookingSection h2,
+.testimonialsSection h2 {
+  text-align: center;
+  font-size: clamp(2em, 4vw, 2.5em); /* Tamaño de fuente responsivo */
+  color: var(--accent-color-light);
+  margin-bottom: 30px;
+}
+
+/* Service Grid - MEJORADO PARA RESPONSIVIDAD */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Min-width un poco más pequeño */
+  gap: 30px;
+}
+
+.serviceCard {
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.serviceCard h3 {
+  color: var(--accent-color-light);
+  font-size: clamp(1.5em, 3vw, 1.8em); /* Tamaño de fuente responsivo */
+  margin-bottom: 10px;
+}
+
+/* Testimonials Section - MEJORADO PARA RESPONSIVIDAD */
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.testimonialCard {
+  background-color: var(--card-bg-light);
+  border-left: 5px solid var(--accent-color-light);
+  border-radius: 8px;
+  padding: 25px;
+  font-style: italic;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.testimonialCard p {
+  margin-bottom: 15px;
+  font-size: clamp(0.9em, 1.8vw, 1em);
+}
+
+.testimonialCard span {
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  color: var(--header-text-light);
+  font-style: normal;
+}
+
+/* Footer del Layout (GLOBAL) */
+.footerLayout {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--card-border-light); /* Usamos una variable */
+  color: var(--footer-text-light);
+  font-size: 0.9em;
+  background-color: var(--footer-bg-light);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+/* Estilos del formulario de agendamiento */
+.bookingForm {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid var(--card-border-light); /* Usamos una variable */
+  border-radius: 8px;
+  background-color: var(--card-bg-light);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Agregamos sombra para mejor integración */
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
+.formGroup label {
+  display: block;
   margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--header-text-light);
 }
 
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="date"],
+.formGroup input[type="time"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--card-border-light); /* Usamos una variable */
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+  background-color: var(--card-bg-light);
+  color: var(--text-color-light);
 }
 
-.ctas {
-  display: flex;
-  gap: 16px;
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--accent-color-light);
+  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2); /* Sombra al enfocar */
 }
 
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+.submitButton {
+  background-color: var(--accent-color-light);
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
+.submitButton:hover {
+  background-color: var(--header-text-light);
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
+.successMessage {
+  color: #28a745;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
 }
 
-.footer {
-  grid-row-start: 3;
-  display: flex;
-  gap: 24px;
+.errorMessage {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
 }
 
-.footer a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* Media Queries Adicionales para responsividad general */
 
-.footer img {
-  flex-shrink: 0;
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-}
-
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
+/* Teléfonos pequeños y medianos */
+@media (max-width: 576px) {
+  .headerLayout {
+    flex-direction: column;
     text-align: center;
   }
 
-  .ctas {
+  .headerLayout .logo {
+    margin-bottom: 10px;
+  }
+
+  .headerLayout .navbar {
     flex-direction: column;
   }
 
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
+  .headerLayout .navLinks {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  a.secondary {
-    min-width: auto;
+  .heroHeader,
+  .bookingHeader {
+    padding: 40px 15px;
+    min-height: unset; /* Quita la altura mínima en pantallas pequeñas */
   }
 
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  .serviceSection,
+  .bookingSection,
+  .testimonialsSection {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .serviceSection h2,
+  .bookingSection h2,
+  .testimonialsSection h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .ctaButton {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+
+  .footerLayout {
+    padding: 20px 10px;
+  }
+
+  .bookingForm {
+    padding: 15px;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+/* Tabletas */
+@media (min-width: 577px) and (max-width: 991px) {
+  .heroHeader,
+  .bookingHeader {
+    padding: 50px 25px;
+  }
+
+  .serviceSection,
+  .bookingSection,
+  .testimonialsSection {
+    padding: 30px;
   }
 }
